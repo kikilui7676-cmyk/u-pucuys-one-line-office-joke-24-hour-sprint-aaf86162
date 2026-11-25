@@ -1,13 +1,14 @@
 import os
-from pathlib import Path
 
-LINE = "That meeting should have been an email, so we scheduled a follow-up meeting to read the email out loud."
+JOKE = "I was laid off by badge: one morning the door stopped opening for me, and it remains the clearest feedback I've ever received."
 
 
-def main() -> None:
-    out_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
-    out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "entry.txt").write_text(LINE + "\n", encoding="utf-8")
+def main():
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", ".")
+    os.makedirs(out_dir, exist_ok=True)
+    path = os.path.join(out_dir, "entry.txt")
+    with open(path, "w", encoding="utf-8") as handle:
+        handle.write(JOKE + "\n")
 
 
 if __name__ == "__main__":
